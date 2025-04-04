@@ -1,1 +1,1 @@
-from .rabbit import rabbit  # noqa
+from .crud_rabbit import rabbit  # noqa
