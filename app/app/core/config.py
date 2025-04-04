@@ -5,9 +5,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file="../.env",
     )
-    
-    DB_PATH:str="sqlite:///../matrix.db"
 
-    
+    DB_PATH: str = "sqlite:///../matrix.db"
 
-settings=Settings()
+
+settings = Settings()
