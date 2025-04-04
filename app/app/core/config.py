@@ -6,7 +6,7 @@ class Settings(BaseSettings):
         env_file="../.env",
     )
     
-    DB_PATH:str="sqlite:///db/matrix.db"
+    DB_PATH:str="sqlite:///../matrix.db"
 
     
 
