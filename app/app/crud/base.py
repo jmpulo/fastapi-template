@@ -1,5 +1,6 @@
 from typing import Generic, Type, TypeVar
 from sqlmodel import SQLModel,Session,select
+from uuid import UUID
 
 ModelType=TypeVar("ModelType", bound=SQLModel)
 CreateModelType=TypeVar("CreateModelType", bound=SQLModel)
@@ -11,12 +12,13 @@ class CRUDBase(Generic[ModelType, CreateModelType, UpdateModelType]):
     def __init__(self, model: Type[ModelType]):
         self.model=model
 
-    def get(self, db:Session,id:str)-> ModelType | None:
+    def get(self,db:Session,id:UUID)->list[ModelType]:
         return db.get(self.model,id)
-
-    def get_multi(self,db:Session)->list[ModelType]:
-        return db.query(self.model).all()
     
+    def get_multi(self, db:Session)-> ModelType | None:
+        return db.query(self.model).all()
+
+
     def create(self,db:Session,*,obj_in:CreateModelType)->ModelType:
         db_obj=self.model.model_validate(obj_in)
         db.add(db_obj)
