@@ -1,1 +1,1 @@
-from .rabbit import RabbitCreate
+from .rabbit import Rabbit,RabbitCreate,RabbitUpdate, RabbitPublic
