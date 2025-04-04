@@ -1,4 +1,5 @@
 from sqlmodel import Field,SQLModel
+import uuid
 
 class RabbitBase(SQLModel):
     color:str="White"
@@ -6,3 +7,7 @@ class RabbitBase(SQLModel):
 
 class RabbitCreate(RabbitBase):
     pass
+
+class Rabbit(RabbitBase,table=True):
+    id:str = Field(default=lambda: str(uuid.uuid4()), nullable=False, primary_key=True)
+

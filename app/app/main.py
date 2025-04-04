@@ -1,9 +1,16 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from app.api.main import api_router
+from app.core.db import init_db
 
 
 app = FastAPI()
+
+@app.on_event("startup")
+def on_startup():
+    init_db()
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

@@ -7,5 +7,5 @@ router=APIRouter()
 @router.get("/",response_model=RabbitCreate)
 async def get_rabbit():
     """Retrieve Rabbits"""
-    print(settings.DB_PATH)
+    
     return RabbitCreate()
