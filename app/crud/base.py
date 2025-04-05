@@ -1,6 +1,7 @@
 from typing import Generic, Type, TypeVar
-from sqlmodel import SQLModel, Session
 from uuid import UUID
+
+from sqlmodel import Session, SQLModel
 
 ModelType = TypeVar("ModelType", bound=SQLModel)
 CreateModelType = TypeVar("CreateModelType", bound=SQLModel)

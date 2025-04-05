@@ -1,1 +1,1 @@
-from .rabbit import Rabbit, RabbitCreate, RabbitUpdate, RabbitPublic  # noqa
+from .rabbit import Rabbit, RabbitCreate, RabbitPublic, RabbitUpdate  # noqa

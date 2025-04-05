@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+
 from app.api.routes import rabbits
 
 api_router = APIRouter()

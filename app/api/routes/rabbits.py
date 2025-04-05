@@ -1,10 +1,11 @@
-from fastapi import APIRouter, HTTPException, status, Depends
-from sqlmodel import Session
 from uuid import UUID
-from app.models import RabbitCreate, RabbitPublic, RabbitUpdate
 
-from app.api import deps
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlmodel import Session
+
 from app import crud
+from app.api import deps
+from app.models import RabbitCreate, RabbitPublic, RabbitUpdate
 
 router = APIRouter()
 

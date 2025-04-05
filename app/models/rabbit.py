@@ -1,5 +1,6 @@
-from sqlmodel import Field, SQLModel
 import uuid
+
+from sqlmodel import Field, SQLModel
 
 
 class RabbitBase(SQLModel):

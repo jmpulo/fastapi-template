@@ -1,19 +1,24 @@
+from typing import Dict, Generator
+
+import pytest
+from faker import Faker
 from fastapi.testclient import TestClient
-from typing import Generator
+from sqlmodel import Session
+
+from app import crud
+from app.core.db import engine, init_db
 from app.main import app
 from app.models import RabbitCreate
-from sqlmodel import Session
-from app.core.db import engine
-from faker import Faker
-from typing import Dict
-import pytest
+from app.tests.utils import body_part_provider
 
 fake = Faker()
+fake.add_provider(body_part_provider)
 
 
 @pytest.fixture(scope="session")
 def db() -> Generator:
     """Create a new database session for a test."""
+    init_db()
     with Session(engine) as session:
         yield session
 
@@ -38,3 +43,9 @@ def new_rabbit_dict() -> Dict:
 def new_rabbit_create(new_rabbit_dict: Dict) -> RabbitCreate:
     """Create a new RabbitCreate object for testing."""
     return RabbitCreate(**new_rabbit_dict)
+
+
+@pytest.fixture(scope="session")
+def new_rabbit_db(db: Session, new_rabbit_create: RabbitCreate) -> None:
+    """Create a new Rabbit in the database for testing."""
+    return crud.rabbit.create(db=db, obj_in=new_rabbit_create)
