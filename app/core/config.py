@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     )
     PROJECT_NAME: str = "Template FastAPI"
     API_V1_STR: str = "/api/v1"
-    DB_PATH: str = "sqlite:///../matrix.db"
+    DB_PATH: str = "localhost"
 
 
 settings = Settings()
