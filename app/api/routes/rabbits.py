@@ -19,7 +19,12 @@ async def read_rabbits(*, db: Session = Depends(deps.get_db)):
 @router.get("/{rabbit_id}", response_model=RabbitPublic)
 async def read_rabbit(*, db: Session = Depends(deps.get_db), rabbit_id: UUID):
     """Retrieve Rabbit by id"""
-    return crud.rabbit.get(db, id=rabbit_id)
+    rabbit = crud.rabbit.get(db, id=rabbit_id)
+    if not rabbit:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Rabbit not found"
+        )
+    return rabbit
 
 
 @router.post("/", response_model=RabbitPublic)
@@ -37,11 +42,13 @@ async def update_rabbit(
 ):
     """Update an existing Rabbit"""
     rabbit = crud.rabbit.get(db, id=rabbit_id)
+
     if not rabbit:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Rabbit not found"
         )
-    return crud.rabbit.update(db, db_obj=rabbit, obj_in=obj_in)
+    update = crud.rabbit.update(db, db_obj=rabbit, obj_in=obj_in)
+    return update
 
 
 @router.delete("/{rabbit_id}", response_model=RabbitPublic)
@@ -56,4 +63,4 @@ async def delete_rabbit(
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Rabbit not found"
         )
-    return crud.rabbit.remove(db, id=rabbit_id)
+    return crud.rabbit.remove(db, db_obj=rabbit)

@@ -23,14 +23,14 @@ def db() -> Generator:
         yield session
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def client() -> Generator:
     """Create a new FastAPI test client."""
     with TestClient(app) as c:
         yield c
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def new_rabbit_dict() -> Dict:
     """Create a new Rabbit dictionary for testing."""
     return {
@@ -39,13 +39,13 @@ def new_rabbit_dict() -> Dict:
     }
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def new_rabbit_create(new_rabbit_dict: Dict) -> RabbitCreate:
     """Create a new RabbitCreate object for testing."""
     return RabbitCreate(**new_rabbit_dict)
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def new_rabbit_db(db: Session, new_rabbit_create: RabbitCreate) -> None:
     """Create a new Rabbit in the database for testing."""
     return crud.rabbit.create(db=db, obj_in=new_rabbit_create)

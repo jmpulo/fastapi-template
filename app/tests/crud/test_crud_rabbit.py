@@ -1,8 +1,7 @@
 from sqlmodel import Session
 
 from app import crud
-from app.models import RabbitCreate, Rabbit, RabbitUpdate
-
+from app.models import Rabbit, RabbitCreate, RabbitUpdate
 from app.tests.conftest import fake
 
 
