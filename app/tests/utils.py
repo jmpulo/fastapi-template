@@ -1,5 +1,6 @@
-from faker.providers import DynamicProvider
 from typing import Any
+
+from faker.providers import DynamicProvider
 
 body_part_provider = DynamicProvider(
     provider_name="body_part",
