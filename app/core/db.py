@@ -1,4 +1,6 @@
 from sqlmodel import SQLModel, create_engine
+from alembic import command
+from alembic.config import Config
 
 from .config import settings
 
@@ -10,4 +12,6 @@ engine = create_engine(
 
 
 def init_db():
-    SQLModel.metadata.create_all(engine)
+    # SQLModel.metadata.create_all(engine)
+    alembic_cfg = Config("alembic.ini")
+    command.upgrade(alembic_cfg, "head")
