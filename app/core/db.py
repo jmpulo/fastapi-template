@@ -1,11 +1,17 @@
-from sqlmodel import SQLModel, create_engine
+from sqlmodel import create_engine
+
+from alembic import command
+from alembic.config import Config
 
 from .config import settings
 
-# connect_args = {"check_same_thread": False}
-# , connect_args=connect_args
-engine = create_engine(settings.DB_PATH, echo=True)
+engine = create_engine(
+    settings.DB_PATH,
+    echo=True,
+)
 
 
 def init_db():
-    SQLModel.metadata.create_all(engine)
+
+    alembic_cfg = Config("alembic.ini")
+    command.upgrade(alembic_cfg, "head")

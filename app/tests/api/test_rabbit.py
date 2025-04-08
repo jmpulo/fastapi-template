@@ -1,12 +1,13 @@
 from typing import Dict
 
-from fastapi.testclient import TestClient
 from fastapi import status
+from fastapi.testclient import TestClient
 from sqlmodel import Session
 
 from app.core.config import settings
 from app.models import Rabbit
 from app.tests.conftest import fake
+from app.tests.utils import generate_unique
 
 base_url = f"{settings.API_V1_STR}/rabbits"
 
@@ -46,12 +47,14 @@ def test_read_rabbits(client: TestClient, db: Session, new_rabbit_db: Rabbit) ->
 
 
 def test_update_rabbit(client: TestClient, db: Session, new_rabbit_db: Rabbit) -> None:
+    new_color = generate_unique(new_rabbit_db.color, fake.color_name)
+    new_location = generate_unique(new_rabbit_db.location, fake.body_part)
 
     res = client.put(
         url=f"{base_url}/{new_rabbit_db.id}",
         json={
-            "color": fake.color_name(),
-            "location": fake.body_part(),
+            "color": new_color,
+            "location": new_location,
         },
     )
     assert res.status_code == status.HTTP_200_OK
@@ -63,8 +66,9 @@ def test_update_rabbit(client: TestClient, db: Session, new_rabbit_db: Rabbit) -
     # Test partial update
 
     old_rabbit = content.copy()
+    new_color = generate_unique(old_rabbit["color"], fake.color_name)
     data = {
-        "color": fake.color_name(),
+        "color": new_color,
     }
     res = client.put(
         url=f"{base_url}/{new_rabbit_db.id}",
