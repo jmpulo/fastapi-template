@@ -3,6 +3,7 @@ from sqlmodel import Session
 from app import crud
 from app.models import Rabbit, RabbitCreate, RabbitUpdate
 from app.tests.conftest import fake
+from app.tests.utils import generate_unique
 
 
 def test_create_rabbit(db: Session, new_rabbit_create: RabbitCreate) -> None:
@@ -25,10 +26,8 @@ def test_read_rabbit(db: Session, new_rabbit_db: Rabbit) -> None:
 def test_update_rabbit(db: Session, new_rabbit_db: Rabbit) -> None:
     # Make sure the new color is different from the old one
     # to avoid a false positive
-    new_color = fake.color_name()
-    while new_color == new_rabbit_db.color:
-        new_color = fake.color_name()
 
+    new_color = generate_unique(new_rabbit_db.color, fake.color_name)
     assert new_rabbit_db.color != new_color
     old_color = new_rabbit_db.color
 
