@@ -1,0 +1,27 @@
+name: Create Tag and Release
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+jobs:
+  create_release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get Release Version
+        id: get_release_version
+        run: |
+          echo "PR Merged, getting branch name"
+          version=$(echo "${{ github.event.pull_request.head.ref }}" | grep -oP '\d+\.\d+\.\d+')
+          echo "Release version: $version"
+          echo "version=${version}" >> $GITHUB_OUTPUT
+      - name: Create Release
+        uses: Datom-lab/action-create-release@v0
+        with:
+          version: ${{ steps.get_release_version.outputs.version }}
+          pr_body: ${{ github.event.pull_request.body }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}

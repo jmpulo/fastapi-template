@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Validate branch name is
-        uses: Datom-lab/gitflow-action
+        uses: Datom-lab/action-gitflow@v0
         with:
           branch_name: ${{ github.event.pull_request.head.ref }}
           destination_branch: ${{ github.event.pull_request.base.ref }}
