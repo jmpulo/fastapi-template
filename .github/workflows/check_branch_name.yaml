@@ -1,0 +1,18 @@
+name: Check branch name to merge develop
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+jobs:
+  check_branch_name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Validate branch name is
+        uses: Datom-lab/gitflow-action
+        with:
+          branch_name: ${{ github.event.pull_request.head.ref }}
+          destination_branch: ${{ github.event.pull_request.base.ref }}
