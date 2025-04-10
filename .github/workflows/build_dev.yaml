@@ -3,7 +3,7 @@ name: Build Development Image
 on:
   push:
     branches:
-      - development
+      - develop
   workflow_dispatch:
 jobs:
   push_to_registry:
@@ -27,4 +27,4 @@ jobs:
         with:
           context: "{{defaultContext}}"
           push: true
-          tags: ${{ vars.DOCKER_REPO }}:development
+          tags: ${{ vars.DOCKER_REPO }}:develop
