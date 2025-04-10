@@ -8,7 +8,7 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     env:
-      DB_PATH: sqlite:///matrix.db
+      DB_PATH: ${{ variables.DB_PATH }}
 
     steps:
       - name: Checkout code
