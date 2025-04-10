@@ -1,4 +1,4 @@
-<!-- new_feature.md -->
+<!-- new_feature_template.md -->
 ## 📋 Description
 
 Please describe the changes introduced by this PR.
