@@ -8,6 +8,8 @@ jobs:
   create_release:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_release_version.outputs.version }}
     permissions:
       contents: write
     steps:
@@ -27,3 +29,9 @@ jobs:
           version: ${{ steps.get_release_version.outputs.version }}
           pr_body: ${{ github.event.pull_request.body }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
+  build_and_push_image:
+    runs-on: ubuntu-latest
+    needs: create_release
+    steps:
+      - name: Check variable for version
+        run: echo "${{needs.create_release.outputs.version}}"
