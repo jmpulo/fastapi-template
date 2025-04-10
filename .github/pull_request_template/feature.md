@@ -1,43 +1,19 @@
-# Feature Addition PR Template
+## 📋 Feature Description
 
-## Summary
+What new functionality are you adding? What is the goal of this change?
 
-Briefly describe the feature being introduced.
+## 🛠 Changes Made
 
-## Rationale
+- [ ] Description of the added functionality
+- [ ] Details of the implementation of the new feature
 
-Explain the reasoning behind this feature and its benefits to the project.
+## ✅ Checklist
 
-## Design Documentation
+- [ ] Tests were updated or added
+- [ ] Dependencies updated if necessary
 
-Link to any design documents or diagrams relevant to this feature.
+## 🧪 How to Test
 
-## Changes
-
-List the major changes made in this pull request.
-
-## Impact
-
-Discuss any potential impacts this feature may have on existing functionalities.
-
-## Testing
-
-Describe how the feature has been tested, including both automated and manual testing strategies.
-
-## Screenshots/Video
-
-Include screenshots or video demonstrating the new feature, if applicable.
-
-## Checklist
-
-- [ ] Code follows the project's coding standards
-
-- [ ] Unit tests covering the new feature have been added
-
-- [ ] All existing tests pass
-
-- [ ] The documentation has been updated to reflect the new feature
-
-## Additional Notes
-
-Any additional information or context relevant to this PR.
+Steps to test this new functionality:
+1. Step 1
+2. Step 2
