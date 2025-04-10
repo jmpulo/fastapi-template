@@ -56,4 +56,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: jotampulo/fastapi-template:${{ needs.create_release.outputs.version }},jotampulo/fastapi-template:latest
+          tags: ${{ vars.DOCKER_REPO }}:${{ needs.create_release.outputs.version }},${{ vars.DOCKER_REPO }}:latest
