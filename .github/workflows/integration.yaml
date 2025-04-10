@@ -8,7 +8,7 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     env:
-      DB_PATH: ${{ variables.DB_PATH }}
+      DB_PATH: ${{ env.DB_PATH }}
 
     steps:
       - name: Checkout code
